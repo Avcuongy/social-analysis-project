@@ -6,4 +6,5 @@ matplotlib
 seaborn
 kagglehub
 scikit-learn
+urllib3
 networkx
