@@ -21,8 +21,6 @@ def dowloader():
         logger.info("Downloading dataset...")
         logger.info(f"Data dir: {DATA_DIR}")
 
-        DATA_DIR.mkdir(parents=True, exist_ok=True)
-
         try:
             path = kagglehub.dataset_download(
                 "kausthubkannan/github-social-network",
