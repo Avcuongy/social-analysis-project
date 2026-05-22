@@ -224,6 +224,7 @@ test_output/
 test/
 
 # data
+github_social_network/
 *.csv
 *.parquet
 *.json
