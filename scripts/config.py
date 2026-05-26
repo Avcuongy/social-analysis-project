@@ -32,7 +32,6 @@ def main() -> None:
     logging.info("Configuration: Starting")
     _ensure_directories()
     dowloader()
-    strategy()
     logging.info("Configuration: Complete")
 
 

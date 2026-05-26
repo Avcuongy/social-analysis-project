@@ -179,6 +179,7 @@ def _create_link_prediction_dataset(
 
 def strategy(
     edges_rel_path: str = "data/github_social_network/musae_git_edges.csv",
+    target_rel_path: str = "data/github_social_network/musae_git_target.csv",
     out_rel_path: str = "data/processed/processed.csv",
     test_ratio: float = 0.2,
     random_state: int = RANDOM_STATE,
@@ -207,8 +208,25 @@ def strategy(
         df_edges=df_edges, test_ratio=test_ratio, random_state=random_state
     )
 
+    target_path = project_root / target_rel_path
+
+    if target_path.exists():
+        LOGGER.info("Loading node features from %s", target_path)
+        df_target = pd.read_csv(target_path)
+        if "id" in df_target.columns:
+            df_target = df_target.rename(columns={"id": "source"})
+
+        LOGGER.info("Merging link prediction data with node features")
+        out_df = link_prediction_df.merge(df_target, on="source", how="left")
+    else:
+        LOGGER.warning(
+            "Node features file %s not found; saving link prediction dataset without features",
+            target_path,
+        )
+        out_df = link_prediction_df
+
     out_path.parent.mkdir(parents=True, exist_ok=True)
-    link_prediction_df.to_csv(out_path, index=False)
+    out_df.to_csv(out_path, index=False)
 
     print(f"[Strategy] Completed dataset to {out_path}")
     LOGGER.info("Saved processed dataset to %s", out_path)
