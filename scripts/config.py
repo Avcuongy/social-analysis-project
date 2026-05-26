@@ -3,6 +3,7 @@ import runpy
 import logging
 
 from dataloader.dowloader import dowloader
+from dataloader.strategy import strategy
 import warnings
 
 warnings.filterwarnings("ignore")
@@ -22,7 +23,6 @@ def _ensure_directories() -> None:
 
 def main() -> None:
     LOGS_DIR.mkdir(parents=True, exist_ok=True)
-
     logging.basicConfig(
         level=logging.INFO,
         format="[%(levelname)s] %(message)s",
@@ -32,6 +32,7 @@ def main() -> None:
     logging.info("Configuration: Starting")
     _ensure_directories()
     dowloader()
+    strategy()
     logging.info("Configuration: Complete")
 
 
