@@ -11,3 +11,4 @@ urllib3
 networkx
 node2vec
 gensim
+fastparquet
