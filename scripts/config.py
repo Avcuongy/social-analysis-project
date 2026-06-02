@@ -30,8 +30,9 @@ def main() -> None:
         filename=LOGS_DIR / "config.log",
     )
     logging.info("Configuration: Starting")
-    _ensure_directories()
     dowloader()
+    _ensure_directories()
+    strategy()
     logging.info("Configuration: Complete")
 
 
