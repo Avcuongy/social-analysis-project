@@ -2,7 +2,6 @@ from pathlib import Path
 import logging
 
 from dataloader.dowloader import dowloader
-from dataloader.strategy import strategy
 import warnings
 
 warnings.filterwarnings("ignore")
@@ -31,7 +30,6 @@ def main() -> None:
     logging.info("Configuration: Starting")
     dowloader()
     _ensure_directories()
-    strategy()
     logging.info("Configuration: Complete")
 
 
